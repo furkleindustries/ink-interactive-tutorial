@@ -4,12 +4,12 @@ import {
   Suspense,
 } from 'react';
 
-import './App.css';
+import styles from './index.module.scss';
 
-const Content = lazy(() => import('./Content.mdx'));
+const Content = lazy(() => import('../Document'));
 
 export const App = () => (
-  <div class="App">
+  <div className={styles.App}>
     <Suspense fallback={<div>Loading...</div>}>
       <Content />
     </Suspense>
