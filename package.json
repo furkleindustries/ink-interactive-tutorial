@@ -81,7 +81,8 @@
   "devDependencies": {
     "@mdx-js/loader": "^1.0.16",
     "fs-extra": "^7.0.1",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "raw-loader": "^2.0.0"
   },
   "jest": {
     "collectCoverageFrom": [

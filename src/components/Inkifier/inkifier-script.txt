@@ -1,6 +1,7 @@
 /* From https://github.com/y-lohse/inkjs/blob/5d2f2fd180cc0ede9360425ab33f11258b0006f1/templates/browser_serverless/main.js. */
 (function (storyContent) {
   var story = new inkjs.Story(storyContent);
+  var storyContainer = document.body;
 
   function showAfter(delay, el) {
     setTimeout(function() {
@@ -73,7 +74,7 @@
         // Remove all existing choices
         var existingChoices = storyContainer.querySelectorAll('p.choice');
         for (var ii = 0; ii < existingChoices.length; ii += 1) {
-          existingChoices[ii].parentNode.removeChild(c);
+          existingChoices[ii].parentNode.removeChild(existingChoices[ii]);
         }
 
         // Tell the story where to go next
