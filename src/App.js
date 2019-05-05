@@ -8,7 +8,7 @@ import './App.css';
 
 const Content = lazy(() => import('./Content.mdx'));
 
-export const App =  () => (
+export const App = () => (
   <div>
     <Suspense fallback={<div>Loading...</div>}>
       <Content />
