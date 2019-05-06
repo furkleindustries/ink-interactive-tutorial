@@ -21,8 +21,6 @@ export class Example extends React.PureComponent {
       throw new Error('Example has no id prop.');
     }
 
-    debugger;
-
     /* Very evil to do this here but I don't care, it's a free tutorial. */
     import(`../../ink/examples/${id}.ink`).then(({
       storyContent,
@@ -38,8 +36,11 @@ export class Example extends React.PureComponent {
     !this.state.loaded ?
       <div>Loading example.</div> :
       <div>
-        <Code>{this.props.text}</Code>
-        <Inkifier storyContent={this.state.storyContent} />
+        <Code>{this.state.text}</Code>
+        <Inkifier
+          storyContent={this.state.storyContent}
+          width={299}
+        />
       </div>
   );
 };

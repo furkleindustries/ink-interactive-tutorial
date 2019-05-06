@@ -1,9 +1,15 @@
-.code {
+.codeWrapper {
   display: block;
-  padding: 5px;
+}
+
+.code {
+  display: inline-block;
+  min-width: 300px;
+  max-width: 100%;
+  padding: 14px 5px 0 10px;
   border: 2px outset rgb(128, 128, 128);
-  background: rgb(180, 180, 180);
-  color: black;
+  background: rgb(220, 220, 220);
+  color: rgb(20, 20, 20);
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

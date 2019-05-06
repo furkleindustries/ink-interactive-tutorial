@@ -14,16 +14,20 @@ import {
 
 import './index.css';
 
-render(
-  <App />,
-  document.getElementById('root'),
-);
+(async () => {
+  if (typeof window !== 'undefined') {
+    window.inkjs = await import('./ink/runtime').default;
+  }
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-if (process.env.NODE_ENV === 'production') {
-  register();
-} else {
-  unregister();
-}
+  render(
+    <App />,
+    document.getElementById('root'),
+  );
+
+  // Learn more about service workers: https://bit.ly/CRA-PWA
+  if (process.env.NODE_ENV === 'production') {
+    register();
+  } else {
+    unregister();
+  }
+})();

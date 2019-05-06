@@ -1,41 +1,55 @@
 import {
+  default as classnames,
+} from 'classnames';
+import {
   default as React,
   createRef,
 } from 'react';
 
 import styles from './index.module.scss';
 
-import script from './inkifier-script.txt';
+export class Inkifier extends React.PureComponent {
+  ref = createRef();
 
-export const Inkifier = ({
-  id = `ink-tutorial-${Math.ceil(Math.random() * 100)}`,
-  storyContent,
-}) => {
-  const Reffer = React.forwardRef((props, ref) => (
-    <iframe
-      class={styles.ink}
-      ref={ref}
-      title={`ink-tutorial-${id}`}
-    ></iframe>
-  ));
+  render = () => {
+    const {
+      className,
+      id = `ink-tutorial-${Math.ceil(Math.random() * 1000000)}`,
+      width = 299,
+      height = 300,
+      storyContent,
+      ...props
+    } = this.props;
 
-  const ref = createRef();
-  const iframeComponent = <Reffer ref={ref} />;
+    const Reffer = React.forwardRef((unused, ref) => (
+      <iframe
+        {...props}
+        className={classnames(styles.inkifier, className)}
+        ref={ref}
+        title={id}
+        width={width}
+        height={height}
+      ></iframe>
+    ));
 
-  const iframeElem = ref.current;
-  const doc = iframeElem.documentElement;
-  const docBody = doc.body;
+    return <Reffer ref={this.ref} />;
+  };
 
-  const inkJsScript = `<script src="./ink.js"></script>`;
-  docBody.appendChild(inkJsScript);
+  componentDidMount = () => {
+    const { storyContent } = this.props;
 
-  const runtimeScriptElem = doc.createElement('script');
-  runtimeScriptElem.textContent =
-    `<script class="runtimeLoop">\n` +
-      `var storyContent = JSON.stringify(\`${storyContent}\`);` +
-      `${script}\n` +
-    `</script>\n`;
-  docBody.appendChild(runtimeScriptElem);
+    const iframeElem = this.ref.current;
+    const doc = iframeElem.contentDocument;
+    const docBody = doc.body;
 
-  return iframeComponent;
+    const inkifierScriptElem = doc.createElement('script');
+    inkifierScriptElem.src = '/inkifier-script.js';
+    docBody.appendChild(inkifierScriptElem);
+  
+    const runtimeScriptElem = doc.createElement('script');
+    runtimeScriptElem.textContent =
+      `var storyContent = ${JSON.stringify(storyContent)};`;
+
+    docBody.appendChild(runtimeScriptElem);
+  };
 };

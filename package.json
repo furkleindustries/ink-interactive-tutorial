@@ -15,6 +15,7 @@
     "babel-plugin-named-asset-import": "^0.3.2",
     "babel-preset-react-app": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "classnames": "^2.2.6",
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
@@ -81,8 +82,10 @@
   "devDependencies": {
     "@mdx-js/loader": "^1.0.16",
     "fs-extra": "^7.0.1",
+    "loader-utils": "^1.2.3",
     "node-sass": "^4.12.0",
-    "raw-loader": "^2.0.0"
+    "raw-loader": "^2.0.0",
+    "schema-utils": "^1.0.0"
   },
   "jest": {
     "collectCoverageFrom": [

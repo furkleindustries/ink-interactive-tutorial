@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const InkWebpackLoader = require('./InkWebpackLoader');
 const isWsl = require('is-wsl');
 const path = require('path');
 const webpack = require('webpack');
@@ -332,6 +333,12 @@ module.exports = function(webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+
+            {
+              test: /inkifier-script\.js$/,
+              use: 'raw-loader',
+            },
+
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
@@ -471,8 +478,8 @@ module.exports = function(webpackEnv) {
             },
 
             {
-              test: /inkifier-script\.txt$/,
-              use: 'raw-loader',
+              test: /\.ink$/,
+              use: path.resolve('./config/InkWebpackLoader'),
             },
 
             // "file" loader makes sure those assets get served by WebpackDevServer.

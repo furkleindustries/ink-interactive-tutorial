@@ -1,5 +1,11 @@
+/* eslint-disable */
 /* From https://github.com/y-lohse/inkjs/blob/5d2f2fd180cc0ede9360425ab33f11258b0006f1/templates/browser_serverless/main.js. */
 (function (storyContent) {
+  var inkjs = window.inkjs;
+  if (window !== top) {
+    inkjs = top.inkjs;
+  }
+
   var story = new inkjs.Story(storyContent);
   var storyContainer = document.body;
 
