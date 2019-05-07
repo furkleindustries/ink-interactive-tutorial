@@ -15,7 +15,7 @@ The most basic ink script is just text in a .ink file.
 Text on separate lines produces new paragraphs:
 
 <Example id="hello-world-multiline" />
-	
+
 ### Comments 
 
 By default, all text in your file will appear in the output content, unless specially marked up. 
@@ -26,7 +26,7 @@ The simplest mark-up is a comment. **ink** supports two kinds of comment. There'
 
 and there's the kind used for reminding the author what they need to do, that the compiler prints out during compilation:
 
-	TODO: Write this section properly!
+<Example id="compiler-comments" />
 
 ### Tags 
 
@@ -103,11 +103,7 @@ The simplest knotty script is:
 
 <Example id="knot-hello-world" />
 
-However, **ink** doesn't like loose ends, and produces a warning on compilation and/or run-time when it thinks this has happened. The script above produces this on compilation:
-
-	WARNING: Apparent loose end exists where the flow runs out. Do you need a '-> END' statement, choice or divert? on line 3 of tests/test.ink
-
-and this on running:
+However, **ink** doesn't like loose ends, and produces a warning on compilation and/or run-time when it thinks this has happened. It also produces the following error on runtime:
 
 	Runtime error in tests/test.ink line 3: ran out of content. Do you need a '-> DONE' or '-> END'?
 	
@@ -123,66 +119,29 @@ The following plays and compiles without error:
 
 You can tell the story to move from one knot to another using `->`, a "divert arrow". Diverts happen immediately without any user input.
 
-	=== back_in_london ===
-	
-	We arrived into London at 9.45pm exactly.
-	-> hurry_home 
-	
-	=== hurry_home === 
-	We hurried home to Savile Row as fast as we could.
-	
+<Example id="diverts" />
+
 #### Diverts are invisible
 
 Diverts are intended to be seamless and can even happen mid-sentence:
 
-	=== hurry_home ===
-	We hurried home to Savile Row -> as_fast_as_we_could
-	
-	=== as_fast_as_we_could ===
-	as fast as we could.
-	
-produces the same line as above:
-	
-	We hurried home to Savile Row as fast as we could.
+<Example id="diverts-seamless" />
 
 #### Glue
 	
 The default behaviour inserts line-breaks before every new line of content. In some cases, however, content must insist on not having a line-break, and it can do so using `<>`, or "glue".
 
-	=== hurry_home ===
-	We hurried home <> 
-	-> to_savile_row 
-	
-	=== to_savile_row ===
-	to Savile Row 
-	-> as_fast_as_we_could
-	
-	=== as_fast_as_we_could ===
-	<> as fast as we could.
-	
-also produces:
-
-	We hurried home to Savile Row as fast as we could.
+<Example id="glue" />
 
 You can't use too much glue: multiple glues next to each other have no additional effect. (And there's no way to "negate" a glue; once a line is sticky, it'll stick.)
 
-	
 ## 5) Branching The Flow
 
 ### Basic branching
 
 Combining knots, options and diverts gives us the basic structure of a choose-your-own game.
 
-	=== paragraph_1 === 
-	You stand by the wall of Analand, sword in hand.
-	* [Open the gate] -> paragraph_2 
-	* [Smash down the gate] -> paragraph_3
-	* [Turn back and go home] -> paragraph_4
-
-	=== paragraph_2 ===
-	You open the gate, and step out onto the path. 
-	
-	...
+<Example id="basic-branching" />
 
 ### Branching and joining
 

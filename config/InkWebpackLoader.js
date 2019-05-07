@@ -1,9 +1,9 @@
 const {
-  exec,
+  execSync,
 } = require('child_process');
 const {
-  remove,
-  readFile,
+  removeSync,
+  readFileSync,
 } = require('fs-extra');
 const {
   getOptions,
@@ -25,20 +25,16 @@ const inklecateDir = join(__dirname, '..', 'inklecate');
 const inklecate = join(inklecateDir, /^windows/i.test(type()) ? 'inklecate.exe' : 'inklecate');
 const tempFile = join(inklecateDir, 'temp.json');
 
-module.exports = async function InkWebpackLoader(source) {
+module.exports = function InkWebpackLoader(source) {
   const options = getOptions(this) || {};
   validateOptions(schema, options, 'Ink Webpack Loader');
 
-  await new Promise((resolve) => {
-    const task = exec(`${inklecate} -o ${tempFile} ${this.resourcePath}`);
-    task.on('message', console.log.bind(console));
-    task.on('error', console.error.bind(console));
-    task.on('exit', resolve);
-  });
+  const output = execSync(`${inklecate} -o ${tempFile} ${this.resourcePath}`);
 
-  const file = await readFile(tempFile);
-  await remove(tempFile);
+  const file = readFileSync(tempFile);
+  removeSync(tempFile);
 
   return `export const storyContent = ${file};\n` +
-    `export const text = ${JSON.stringify(source.trim())};\n`;
+    `export const text = ${JSON.stringify(source.trim())};\n` +
+    `export const output = ${JSON.stringify(String(output).trim())};\n`;
 };

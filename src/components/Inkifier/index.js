@@ -36,14 +36,17 @@ export class Inkifier extends React.PureComponent {
   };
 
   componentDidMount = () => {
-    const { storyContent } = this.props;
+    const {
+      output,
+      storyContent,
+    } = this.props;
 
     const iframeElem = this.ref.current;
     const doc = iframeElem.contentDocument;
     const docBody = doc.body;
 
     const inkifierScriptElem = doc.createElement('script');
-    inkifierScriptElem.src = '/inkifier-script.js';
+    inkifierScriptElem.src = './inkifier-script.js';
     docBody.appendChild(inkifierScriptElem);
   
     const runtimeScriptElem = doc.createElement('script');
@@ -51,5 +54,25 @@ export class Inkifier extends React.PureComponent {
       `var storyContent = ${JSON.stringify(storyContent)};`;
 
     docBody.appendChild(runtimeScriptElem);
+
+    if (output) {
+      const lines = output
+        .split('\n')
+        .map((aa) => aa.trim())
+        .filter(Boolean);
+
+      if (lines.length) {
+        const outputContainer = doc.createElement('ul');
+        for (const line of lines) {
+          const lineElem = doc.createElement('li');
+          const lineElemCode = doc.createElement('code');
+          lineElemCode.textContent = line;
+          lineElem.appendChild(lineElemCode);
+          outputContainer.appendChild(lineElem);
+        }
+
+        docBody.appendChild(outputContainer);
+      }
+    }
   };
-};
+}

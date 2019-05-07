@@ -11,6 +11,7 @@ import {
 export class Example extends React.PureComponent {
   state = {
     loaded: false,
+    output: '',
     storyContent: null,
     text: '',
   };
@@ -24,8 +25,10 @@ export class Example extends React.PureComponent {
     /* Very evil to do this here but I don't care, it's a free tutorial. */
     import(`../../ink/examples/${id}.ink`).then(({
       storyContent,
+      output,
       text,
     }) => this.setState({
+      output,
       storyContent,
       text,
       loaded: true,
@@ -38,6 +41,7 @@ export class Example extends React.PureComponent {
       <div>
         <Code>{this.state.text}</Code>
         <Inkifier
+          output={this.state.output}
           storyContent={this.state.storyContent}
           width={299}
         />
