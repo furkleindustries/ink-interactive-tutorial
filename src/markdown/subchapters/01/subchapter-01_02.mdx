@@ -1,0 +1,33 @@
+## 2) Choices 
+
+Input is offered to the player via text choices. A text choice is indicated by an `*` character. 
+
+If no other flow instructions are given, once made, the choice will flow into the next line of text.
+
+<Example id="choice-hello-world" />
+
+By default, the text of a choice appears again, in the output. 
+	
+### Suppressing choice text 
+
+Some games separate the text of a choice from its outcome. In **ink**, if the choice text is given in square brackets, the text of the choice will not be printed into response.
+
+<Example id="suppressing-choice-text" />
+
+#### Advanced: mixing choice and output text
+
+The square brackets in fact divide up the option content. What's before is printed in both choice and output; what's inside only in choice; and what's after, only in output. Effectively, they provide alternative ways for a line to end.
+
+<Example id="mixing-choice-and-output-text" />
+	
+This is most useful when writing dialogue choices:
+
+<Example id="mixed-dialogue-choices" />
+
+### Multiple Choices
+
+To make choices really choices, we need to provide alternatives. We can do this simply by listing them:
+
+<Example id="multiple-choices" />
+
+The above syntax is enough to write a single set of choices. In a real game, we'll want to move the flow from one point to another based on what the player chooses. To do that, we need to introduce a bit more structure.

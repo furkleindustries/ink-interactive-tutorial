@@ -1,4 +1,7 @@
 import {
+  BrowserRouter as Link, Route, Router,
+} from 'react-router-dom';
+import {
   default as React,
   lazy,
   Suspense,
@@ -6,12 +9,14 @@ import {
 
 import styles from './index.module.scss';
 
-const Content = lazy(() => import('../Document'));
+const Document = lazy(() => import('../Document'));
 
 export const App = () => (
   <div className={styles.App}>
     <Suspense fallback={<div>Loading...</div>}>
-      <Content />
+      <Router>
+        <Document />
+      </Router>
     </Suspense>
   </div>
 );

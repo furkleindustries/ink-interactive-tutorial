@@ -1,0 +1,34 @@
+## 1) Content
+
+### The simplest ink script
+
+The most basic ink script is just text in a .ink file.
+
+<Example id="hello-world" />
+
+Text on separate lines produces new paragraphs:
+
+<Example id="hello-world-multiline" />
+
+### Comments 
+
+By default, all text in your file will appear in the output content, unless specially marked up. 
+
+The simplest mark-up is a comment. **ink** supports two kinds of comment. There's the kind used for someone reading the code, which the compiler ignores:
+
+<Example id="comments" />
+
+and there's the kind used for reminding the author what they need to do, that the compiler prints out during compilation:
+
+<Example id="compiler-comments" />
+
+### Tags 
+
+Text content from the game will appear 'as is' when the engine runs. However, it can sometimes be useful to mark up a line of content with extra information to tell the game what to do with that content. 
+
+**ink** provides a simple system for tagging lines of content, with hashtags. 
+
+	=== content 
+		A line of normal game-text. # colour it blue
+
+These don't show up in the main text flow, but can be read off by the game and used as you see fit. See [RunningYourInk](https://github.com/inkle/ink/blob/master/Documentation/RunningYourInk.md#marking-up-your-ink-content-with-tags) for more information.

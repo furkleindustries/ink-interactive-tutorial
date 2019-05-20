@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const InkWebpackLoader = require('./InkWebpackLoader');
+const InklecateLoader = require('inklecate-loader');
 const isWsl = require('is-wsl');
 const path = require('path');
 const webpack = require('webpack');
@@ -479,7 +479,7 @@ module.exports = function(webpackEnv) {
 
             {
               test: /\.ink$/,
-              use: path.resolve('./config/InkWebpackLoader'),
+              use: require.resolve('inklecate-loader'),
             },
 
             // "file" loader makes sure those assets get served by WebpackDevServer.

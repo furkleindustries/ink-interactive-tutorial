@@ -48,7 +48,7 @@ export class Inkifier extends React.PureComponent {
     const inkifierScriptElem = doc.createElement('script');
     inkifierScriptElem.src = './inkifier-script.js';
     docBody.appendChild(inkifierScriptElem);
-  
+
     const runtimeScriptElem = doc.createElement('script');
     runtimeScriptElem.textContent =
       `var storyContent = ${JSON.stringify(storyContent)};`;

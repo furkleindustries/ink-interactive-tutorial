@@ -1,0 +1,31 @@
+## 5) Branching The Flow
+
+### Basic branching
+
+Combining knots, options and diverts gives us the basic structure of a choose-your-own game.
+
+<Example id="basic-branching" />
+
+### Branching and joining
+
+Using diverts, the writer can branch the flow, and join it back up again, without showing the player that the flow has rejoined.
+
+<Example id="branching-and-joining" />
+
+### The story flow 
+
+Knots and diverts combine to create the basic story flow of the game. This flow is "flat" - there's no call-stack, and diverts aren't "returned" from. 
+
+In most ink scripts, the story flow starts at the top, bounces around in a spaghetti-like mess, and eventually, hopefully, reaches a `-> END`.
+
+The very loose structure means writers can get on and write, branching and rejoining without worrying about the structure that they're creating as they go. There's no boiler-plate to creating new branches or diversions, and no need to track any state.
+
+#### Advanced: Loops
+
+You absolutely can use diverts to create looped content, and **ink** has several features to exploit this, including ways to make the content vary itself, and ways to control how often options can be chosen. 
+
+See the sections on Varying Text and Conditional Options for more information.
+
+Oh, and the following is legal and not a great idea:
+
+<Example id="recursion" />
