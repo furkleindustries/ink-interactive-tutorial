@@ -1,1 +1,15 @@
-﻿{"inkVersion":19,"root":[[{"->":"the_orient_express"},["done",{"#f":7,"#n":"g-0"}],null],"done",{"the_orient_express":[{"->":".^.in_first_class"},{"in_first_class":["^Mmm, complimentary spinach wraps!","\n","end",{"#f":3}],"in_third_class":["^It's alright. Nothing special.","\n","end",{"#f":3}],"in_the_guards_van":["^How very authentic.","\n","end",{"#f":3}],"missed_the_train":[["^Oops! No adventure for you.","\n","end","ev","str","^Sneak onto first class","/str","/ev",{"*":".^.c-0","flg":20},"ev","str","^Travel in third class","/str","/ev",{"*":".^.c-1","flg":20},"ev","str","^Travel in the guard's van","/str","/ev",{"*":".^.c-2","flg":20},"ev","str","^Go home","/str","/ev",{"*":".^.c-3","flg":20},{"c-0":["\n",{"->":".^.^.^.^.in_first_class"},{"#f":7}],"c-1":["\n",{"->":".^.^.^.^.in_third_class"},{"#f":7}],"c-2":["\n",{"->":".^.^.^.^.in_the_guards_van"},{"#f":7}],"c-3":[{"->":".^.^.^"},"\n",{"#f":7}]}],{"#f":3}],"#f":3}],"#f":3}],"listDefs":{}}
+﻿-> the_orient_express
+
+=== the_orient_express ===
+= in_first_class 
+	Mmm, complimentary spinach wraps!
+  -> END
+= in_third_class
+	It's alright. Nothing special.
+  -> END
+= in_the_guards_van 
+  How very authentic.
+  -> END
+= missed_the_train
+	No adventure for you.
+  -> END
