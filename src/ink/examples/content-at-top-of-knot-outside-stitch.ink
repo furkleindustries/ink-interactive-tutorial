@@ -1,12 +1,1 @@
--> the_orient_express
-
-=== the_orient_express === 
-
-We boarded the train, but where?
-*	[First class] -> in_first_class
-*	[Second class] -> in_second_class
-
-= in_first_class 
-  You settle into your roomy seat.
-= in_second_class
-  It's comfortable, but napping won't be easy.
+﻿{"inkVersion":19,"root":[[{"->":"the_orient_express"},["done",{"#f":7,"#n":"g-0"}],null],"done",{"the_orient_express":[["^We boarded the train, but where?","\n","ev","str","^First class","/str","/ev",{"*":".^.c-0","flg":20},"ev","str","^Second class","/str","/ev",{"*":".^.c-1","flg":20},{"c-0":["^ ",{"->":".^.^.^.in_first_class"},"\n",{"#f":7}],"c-1":["^ ",{"->":".^.^.^.in_second_class"},"\n",{"#f":7}]}],{"in_first_class":["^You settle into your roomy seat.","\n",{"#f":3}],"in_second_class":["^It's comfortable, but napping won't be easy.","\n",{"#f":3}],"#f":3}],"#f":3}],"listDefs":{}}

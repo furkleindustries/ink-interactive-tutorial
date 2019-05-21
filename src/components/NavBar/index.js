@@ -35,8 +35,8 @@ export const NavBar = () => (
       </li>
 
       <li className={classnames(styles.navBarListItem)}>
-        <NavBarItem href="/repl">
-          REPL
+        <NavBarItem href="/playground">
+          Playground
         </NavBarItem>
       </li>
     </ul>

@@ -17,11 +17,11 @@ import Chapter03 from '../../markdown/pages/chapter-03.mdx';
 import Chapter04 from '../../markdown/pages/chapter-04.mdx';
 import Chapter05 from '../../markdown/pages/chapter-05.mdx';
 import Chapter06 from '../../markdown/pages/chapter-06.mdx';
-import ExampleList from '../../markdown/Home.mdx';
-import Home from '../../markdown/Home.mdx';
-import Playground from '../../markdown/Home.mdx';
-import Search from '../../markdown/search.mdx';
-import TableOfContents from '../../markdown/table-of-contents.mdx';
+import ExampleList from '../../markdown/pages/example-list.mdx';
+import Home from '../../markdown/pages/home.mdx';
+import Playground from '../../markdown/pages/playground.mdx';
+import Search from '../../markdown/pages/search.mdx';
+import TableOfContents from '../../markdown/pages/table-of-contents.mdx';
 
 import * as React from 'react';
 

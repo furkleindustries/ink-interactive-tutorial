@@ -1,10 +1,1 @@
--> the_orient_express
-
-=== the_orient_express ===
-= in_first_class 
-  I settled my master.
-  *	[Move to third class]
-    -> in_third_class
-
-= in_third_class
-  I put myself in third.
+﻿{"inkVersion":19,"root":[[{"->":"the_orient_express"},["done",{"#f":7,"#n":"g-0"}],null],"done",{"the_orient_express":[{"->":".^.in_first_class"},{"in_first_class":[["^I settled my master.","\n","ev","str","^Move to third class","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n",{"->":".^.^.^.^.in_third_class"},{"#f":7}]}],{"#f":3}],"in_third_class":["^I put myself in third.","\n",{"#f":3}],"#f":3}],"#f":3}],"listDefs":{}}

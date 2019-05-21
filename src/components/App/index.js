@@ -1,5 +1,8 @@
 import {
-  BrowserRouter as Link, Route, Router,
+  createBrowserHistory,
+} from 'history';
+import {
+  Router,
 } from 'react-router-dom';
 import {
   default as React,
@@ -13,10 +16,10 @@ const Document = lazy(() => import('../Document'));
 
 export const App = () => (
   <div className={styles.App}>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Router>
+    <Router history={createBrowserHistory()}>
+      <Suspense fallback={<div>Loading...</div>}>
         <Document />
-      </Router>
-    </Suspense>
+      </Suspense>
+    </Router>
   </div>
 );
