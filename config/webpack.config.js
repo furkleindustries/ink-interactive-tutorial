@@ -1,7 +1,7 @@
 'use strict';
 
+const frontmatter = require('remark-frontmatter');
 const fs = require('fs');
-const InklecateLoader = require('inklecate-loader');
 const isWsl = require('is-wsl');
 const path = require('path');
 const webpack = require('webpack');
@@ -80,10 +80,12 @@ module.exports = function(webpackEnv) {
           shouldUseRelativeAssetPaths ? { publicPath: '../../' } : undefined
         ),
       },
+
       {
         loader: require.resolve('css-loader'),
         options: cssOptions,
       },
+
       {
         // Options for PostCSS as we reference these options twice
         // Adds vendor prefixing based on your specified browser support in
@@ -101,6 +103,7 @@ module.exports = function(webpackEnv) {
               },
               stage: 3,
             }),
+
             // Adds PostCSS Normalize as the reset css with default options,
             // so that it honors browserslist config in package.json
             // which in turn let's users customize the target behavior as per their needs.
@@ -151,6 +154,7 @@ module.exports = function(webpackEnv) {
       // initialization, it doesn't blow up the WebpackDevServer client, and
       // changing JS code would still trigger a refresh.
     ].filter(Boolean),
+
     output: {
       // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
@@ -158,27 +162,28 @@ module.exports = function(webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].js'
-        : isEnvDevelopment && 'static/js/bundle.js',
+      filename: isEnvProduction ?
+        'static/js/[name].[contenthash:8].js' :
+        isEnvDevelopment && 'static/js/bundle.js',
       // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
+      chunkFilename: isEnvProduction ?
+        'static/js/[name].[contenthash:8].chunk.js' :
+        isEnvDevelopment && 'static/js/[name].chunk.js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
       // Point sourcemap entries to original disk location (format as URL on Windows)
-      devtoolModuleFilenameTemplate: isEnvProduction
-        ? info =>
+      devtoolModuleFilenameTemplate: isEnvProduction ? (info) => (
             path
               .relative(paths.appSrc, info.absoluteResourcePath)
               .replace(/\\/g, '/')
-        : isEnvDevelopment &&
+        ) :
+        isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
+
     optimization: {
       minimize: isEnvProduction,
       minimizer: [
@@ -244,6 +249,7 @@ module.exports = function(webpackEnv) {
           },
         }),
       ],
+
       // Automatically split vendor and commons
       // https://twitter.com/wSokra/status/969633336732905474
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -251,16 +257,22 @@ module.exports = function(webpackEnv) {
         chunks: 'all',
         name: false,
       },
+
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
       runtimeChunk: true,
     },
+
     resolve: {
       // This allows you to set a fallback for where Webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
       // https://github.com/facebook/create-react-app/issues/253
-      modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
+      modules: [
+        'node_modules',
+        paths.appNodeModules,
+      ].concat(modules.additionalModulePaths || []),
+
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
       // some tools, although we do not recommend using it, see:
@@ -268,25 +280,22 @@ module.exports = function(webpackEnv) {
       // `web` extension prefixes have been added for better support
       // for React Native Web.
       extensions: paths.moduleFileExtensions
-        .map(ext => `.${ext}`)
-        .filter(ext => useTypeScript || !ext.includes('ts')),
-      alias: {
-        // Support React Native Web
-        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-        'react-native': 'react-native-web',
-      },
+        .map((ext) => `.${ext}`)
+        .filter((ext) => useTypeScript || !ext.includes('ts')),
+
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
         // guards against forgotten dependencies and such.
         PnpWebpackPlugin,
-        // Prevents users from importing files from outside of src/ (or node_modules/).
-        // This often causes confusion because we only process files within src/ with babel.
-        // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+        // Prevents users from importing files from outside of / (or node_modules/).
+        // This often causes confusion because we only process files within / with babel.
+        // To fix this, we prevent you from importing files out of / -- if you'd like to,
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
-        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+        new ModuleScopePlugin(paths.appSrc, [ paths.appPackageJson ]),
       ],
     },
+
     resolveLoader: {
       plugins: [
         // Also related to Plug'n'Play, but this time it tells Webpack to load its loaders
@@ -307,16 +316,17 @@ module.exports = function(webpackEnv) {
           enforce: 'pre',
           use: [
             {
+              loader: require.resolve('eslint-loader'),
               options: {
                 formatter: require.resolve('react-dev-utils/eslintFormatter'),
                 eslintPath: require.resolve('eslint'),
-                
               },
-              loader: require.resolve('eslint-loader'),
             },
           ],
+
           include: paths.appSrc,
         },
+
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
@@ -336,7 +346,7 @@ module.exports = function(webpackEnv) {
 
             {
               test: /inkifier-script\.js$/,
-              use: 'raw-loader',
+              use: require.resolve('raw-loader'),
             },
 
             // Process application JS with Babel.
@@ -416,6 +426,7 @@ module.exports = function(webpackEnv) {
               // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true,
             },
+
             // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
             // using the extension .module.css
             {
@@ -427,6 +438,7 @@ module.exports = function(webpackEnv) {
                 getLocalIdent: getCSSModuleLocalIdent,
               }),
             },
+
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
             // extensions .module.scss or .module.sass
@@ -446,6 +458,7 @@ module.exports = function(webpackEnv) {
               // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true,
             },
+
             // Adds support for CSS Modules, but using SASS
             // using the extension .module.scss or .module.sass
             {
@@ -472,7 +485,14 @@ module.exports = function(webpackEnv) {
                 'babel-loader',
                 {
                   loader: '@mdx-js/loader',
-                  options: {},
+                  options: {
+                    remarkPlugins: [
+                      frontmatter,
+                    ],
+
+                    marker: '-',
+                    type: 'yaml',
+                  },
                 },
               ],
             },

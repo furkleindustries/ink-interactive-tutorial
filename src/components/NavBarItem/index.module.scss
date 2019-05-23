@@ -1,3 +1,16 @@
+@import '../../sass/vars';
+
 .navBarItem {
-  display: flex;
+  .link {
+    color: $white;
+    text-decoration: underline;
+
+    &:visited {
+      color: inherit;
+    }
+
+    &:hover {
+      color: $light-blue;
+    }
+  }
 }

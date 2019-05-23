@@ -1,0 +1,13 @@
+.minimizable {
+  display: block;
+}
+
+.button {
+  display: block;
+}
+
+.subcontainer {
+  .minimized {
+    display: none;
+  }
+}

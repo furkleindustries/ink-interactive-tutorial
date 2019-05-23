@@ -11,8 +11,8 @@ export const NavBar = () => (
   <nav className={classnames(styles.navBar)}>
     <ul className={classnames(styles.navBarList)}>
       <li className={classnames(styles.navBarListItem)}>
-        <NavBarItem href="/home">
-          Home
+        <NavBarItem href="/">
+          Tutorial
         </NavBarItem>
       </li>
 

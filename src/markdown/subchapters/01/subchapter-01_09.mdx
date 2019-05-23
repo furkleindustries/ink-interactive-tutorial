@@ -1,3 +1,13 @@
+---
+title: 'Game Queries'
+chapterIndex: 1
+index: 9
+---
+
+import {
+	Example,
+} from '../../../components/Example';
+
 ## 9) Game Queries
 
 **ink** provides a few useful 'game level' queries about game state, for use in conditional logic. They're not quite parts of the language, but they're always available, and they can't be edited by the author. In a sense, they're the "standard library functions" of the language.
@@ -9,8 +19,8 @@ The convention is to name these in capital letters.
 `CHOICE_COUNT` returns the number of options created so far in the current chunk. So for instance.
 
 	*	{false} Option A
-	* 	{true} Option B
-	*  {CHOICE_COUNT() == 1} Option C
+	* {true} Option B
+	* {CHOICE_COUNT() == 1} Option C
 
 produces two options, B and C. This can be useful for controlling how many options a player gets on a turn. 
 

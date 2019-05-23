@@ -1,0 +1,30 @@
+@import '../../sass/vars';
+
+.tableOfContents {
+}
+
+.chapter {
+}
+
+.chapterLink {
+  color: $white;
+
+  &:visited {
+    color: inherit;
+  }
+}
+
+.subchapterList {
+  list-style-type: lower-roman;
+}
+
+.subchapter {
+}
+
+.subchapterLink {
+  color: $white;
+
+  &:visited {
+    color: inherit;
+  }
+}

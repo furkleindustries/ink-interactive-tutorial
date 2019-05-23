@@ -22,6 +22,7 @@ import Home from '../../markdown/pages/home.mdx';
 import Playground from '../../markdown/pages/playground.mdx';
 import Search from '../../markdown/pages/search.mdx';
 import TableOfContents from '../../markdown/pages/table-of-contents.mdx';
+import Tutorial from '../../markdown/pages/tutorial.mdx';
 
 import * as React from 'react';
 
@@ -34,7 +35,12 @@ const Document = () => (
     <MDXProvider components={mdxComponents}>
       <Route
         component={Home}
-        path="/home"
+        path="/"
+      />
+
+      <Route
+        component={Tutorial}
+        path="/tutorial"
       />
 
       <Route

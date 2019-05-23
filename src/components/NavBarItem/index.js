@@ -13,7 +13,10 @@ export const NavBarItem = ({
 }) => (
   <div className={classnames(styles.navBarItem)}>
     {href ?
-      <Link to={href}>{children}</Link> :
+      <Link
+        className={styles.link}
+        to={href}
+      >{children}</Link> :
       children}
   </div>
 );
