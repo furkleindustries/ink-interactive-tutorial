@@ -1,15 +1,19 @@
+@import '../../sass/vars';
+
 .codeWrapper {
-  display: block;
+  flex-basis: 50%;
 }
 
 .code {
   display: inline-block;
-  min-width: 300px;
-  max-width: 100%;
-  padding: 14px 5px 0 10px;
+  width: 100%;
+  height: 100%;
+  padding: 10px 5px 0 10px;
   border: 2px outset rgb(128, 128, 128);
-  background: rgb(220, 220, 220);
-  color: rgb(20, 20, 20);
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  overflow-y: scroll;
+  background: $white;
+  color: $black;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  resize: none;
 }

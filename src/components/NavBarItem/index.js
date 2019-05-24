@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import {
   Link,
-} from 'react-router-dom';
+} from '../Link';
 
 import * as React from 'react';
 

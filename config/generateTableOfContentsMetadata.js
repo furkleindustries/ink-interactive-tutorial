@@ -31,7 +31,7 @@ const chaptersPromise = new Promise((resolve, reject) => {
             index,
             filepath,
             title,
-            subchapters: {},
+            subchapters: [],
           });
         },
         reject,
@@ -79,12 +79,21 @@ Promise.all([ chaptersPromise, subchaptersPromise ]).then(
     chaptersArg,
     subchapters,
   ]) => {
-    const chapters = chaptersArg.slice();
+    const chapters = chaptersArg.sort((
+      { index: a },
+      { index: b },
+    ) => a < b ? -1 : 1);
+
     subchapters.forEach((subchapter) => {
-      const chapterIndex = Math.max(0, subchapter.chapterIndex - 1);
-      delete subchapter.chapterIndex;
-      const subchapterIndex = Math.max(0, subchapter.index - 1);
-      chapters[chapterIndex].subchapters[subchapterIndex] = subchapter;
+      const chapterIndex = subchapter.chapterIndex;
+      chapters[chapterIndex].subchapters.push(subchapter);
+    });
+
+    chapters.forEach((chapter) => {
+      chapter.subchapters = chapter.subchapters.sort((
+        { index: a },
+        { index: b },
+      ) => a < b ? -1 : 1);
     });
 
     const output = `export default ${JSON.stringify(chapters)};\n`;

@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import {
   Code,
 } from '../Code';
@@ -5,8 +6,15 @@ import {
   Inkifier,
 } from '../Inkifier';
 import {
-  default as React,
-} from 'react';
+  Lazy,
+} from '../Lazy';
+import {
+  Pixel,
+} from '../Pixel';
+
+import * as React from 'react';
+
+import styles from './index.module.scss';
 
 export class Example extends React.PureComponent {
   state = {
@@ -16,13 +24,41 @@ export class Example extends React.PureComponent {
     text: '',
   };
 
-  componentDidMount = () => {
+  debounce = 500;
+  offset = 200;
+  widgetHeight = 350;
+
+  render = () => (
+    <Lazy
+      debounce={this.debounce}
+      height={this.widgetHeight}
+      offset={this.offset}
+    >
+      <Pixel onLoad={this.importExample} />
+
+      <div className={classnames(styles.example)}>
+        {this.state.loaded ?
+          <div className={styles.loaded}>
+            <Code>{this.state.text}</Code>
+            <Inkifier
+              inkifierScriptDir={this.props.inkifierScriptDir}
+              output={this.state.output}
+              storyContent={this.state.storyContent}
+              width="50%"
+              height="100%"
+            />
+          </div> :
+          <div className={styles.loading}>Loading example.</div>}
+      </div>
+    </Lazy>
+  );
+
+  importExample = () => {
     const { id } = this.props;
     if (!id) {
       throw new Error('Example has no id prop.');
     }
 
-    /* Very evil to do this here but I don't care, it's a free tutorial. */
     import(`../../ink/examples/${id}.ink`).then(({
       storyContent,
       output,
@@ -34,17 +70,4 @@ export class Example extends React.PureComponent {
       loaded: true,
     }));
   };
-
-  render = () => (
-    !this.state.loaded ?
-      <div>Loading example.</div> :
-      <div>
-        <Code>{this.state.text}</Code>
-        <Inkifier
-          output={this.state.output}
-          storyContent={this.state.storyContent}
-          width={299}
-        />
-      </div>
-  );
 };

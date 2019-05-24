@@ -6,7 +6,7 @@ We boarded the train, but where?
 
 = in_first_class 
 	You settle into your roomy seat.
-  -> END
+  -> DONE
 = in_second_class
 	It's nice, but napping won't be easy.
-  -> END
+  -> DONE

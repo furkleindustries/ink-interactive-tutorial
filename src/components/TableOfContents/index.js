@@ -1,11 +1,21 @@
 import classnames from 'classnames';
+import {
+  Link,
+} from '../Link';
 
 import * as React from 'react';
 
 import styles from './index.module.scss';
 
-export const TableOfContents = ({ chapters }) => (
-  <ol className={classnames(styles.tableOfContents)}>
+export const TableOfContents = ({
+  hashLinking,
+  chapters,
+  start = 1,
+}) => (
+  <ol
+    className={classnames(styles.tableOfContents)}
+    start={start}
+  >
     {chapters.map(({
       href,
       index,
@@ -25,47 +35,53 @@ export const TableOfContents = ({ chapters }) => (
           className={styles.chapter}
           key={index}
         >
-          <a
+          <Link
             className={styles.chapterLink}
-            href={chapterHref}
+            to={chapterHref}
           >{
             title
-          }</a>
-  
-          {Object.keys(subchapters).length ?
-            <ol className={styles.subchapterList}>
-              {Object.keys(subchapters).map((baseIndex) => {
-                const {
-                  href,
-                  index,
-                  title,
-                } = subchapters[baseIndex];
+          }</Link>
 
-                const paddedSubchapterIndex = index < 10 ? `0${index}` : index;
+          <ol className={styles.subchapterList}>
+            {Object.keys(subchapters).map((baseIndex) => {
+              const {
+                href,
+                index,
+                title,
+              } = subchapters[baseIndex];
 
-                let subchapterHref;
-                if (href) {
-                  subchapterHref = href;
-                } else {
-                  subchapterHref = `chapter-${paddedChapterIndex}#subchapter-${paddedSubchapterIndex}`;
-                }
+              const paddedSubchapterIndex = index < 10 ? `0${index}` : index;
 
-                return (
-                  <li
-                    className={classnames(styles.subchapter)}
-                    key={index}
-                  >
-                    <a
-                      className={classnames(styles.subchapterLink)}
-                      href={subchapterHref}
-                    >{
-                      title
-                    }</a>
-                  </li>
+              let subchapterHref;
+              if (href) {
+                subchapterHref = href;
+              } else if (hashLinking) {
+                subchapterHref = (
+                  `chapter-${paddedChapterIndex}` +
+                    `#subchapter-${paddedSubchapterIndex}`
                 );
-              })}
-            </ol> :
-            null}
+              } else {
+                subchapterHref = (
+                  `chapter-${paddedChapterIndex}/` +
+                    `subchapter-${paddedSubchapterIndex}`
+                );
+              }
+
+              return (
+                <li
+                  className={classnames(styles.subchapter)}
+                  key={index}
+                >
+                  <Link
+                    className={classnames(styles.subchapterLink)}
+                    to={subchapterHref}
+                  >{
+                    title
+                  }</Link>
+                </li>
+              );
+            })}
+          </ol>
         </li>
       );
     })}

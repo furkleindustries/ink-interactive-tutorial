@@ -1,10 +1,9 @@
+import classnames from 'classnames';
 import {
-  default as classnames,
-} from 'classnames';
-import {
-  default as React,
   createRef,
 } from 'react';
+
+import * as React from 'react';
 
 import styles from './index.module.scss';
 
@@ -15,6 +14,7 @@ export class Inkifier extends React.PureComponent {
     const {
       className,
       id = `ink-tutorial-${Math.ceil(Math.random() * 1000000)}`,
+      inkifierScriptDir,
       width = 299,
       height = 300,
       storyContent,
@@ -37,6 +37,7 @@ export class Inkifier extends React.PureComponent {
 
   componentDidMount = () => {
     const {
+      inkifierScriptDir = '..',
       output,
       storyContent,
     } = this.props;
@@ -46,7 +47,7 @@ export class Inkifier extends React.PureComponent {
     const docBody = doc.body;
 
     const inkifierScriptElem = doc.createElement('script');
-    inkifierScriptElem.src = './inkifier-script.js';
+    inkifierScriptElem.src = `${inkifierScriptDir}/inkifier-script.js`;
     docBody.appendChild(inkifierScriptElem);
 
     const runtimeScriptElem = doc.createElement('script');

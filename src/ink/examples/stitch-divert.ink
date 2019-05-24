@@ -3,13 +3,13 @@
 === the_orient_express ===
 = in_first_class 
 	Mmm, complimentary spinach wraps!
-  -> END
+  -> DONE
 = in_third_class
 	It's alright. Nothing special.
-  -> END
+  -> DONE
 = in_the_guards_van 
   How very authentic.
-  -> END
+  -> DONE
 = missed_the_train
 	No adventure for you.
-  -> END
+  -> DONE
